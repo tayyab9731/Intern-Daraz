@@ -1,5 +1,4 @@
 package com.venturedive.project.model;
-import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,34 +7,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
 @Entity
 
-@Inheritance(strategy=InheritanceType.JOINED) 
-public class customer extends AbstractPersistable<Long>{
+@Inheritance(strategy = InheritanceType.JOINED)
+public class customer extends AbstractPersistable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
-  
+	private String name;
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private UserDetails details;
+	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private UserDetails details;
 
-    public customer() {
-    }
+	public customer() {
+	}
 
-    public customer(String name) {
-        super();
-    	this.name = name;
-        
-    }
+	public customer(String name) {
+		super();
+		this.name = name;
+
+	}
 
 	public Long getId() {
 		return id;

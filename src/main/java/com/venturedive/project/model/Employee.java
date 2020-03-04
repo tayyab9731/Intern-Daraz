@@ -1,39 +1,31 @@
 package com.venturedive.project.model;
-import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.OneToOne;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.*;
 @Entity
 
-@Inheritance(strategy=InheritanceType.JOINED) 
-public class Employee extends AbstractPersistable<Long>{
+public class Employee  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long emp_id;
-private String name;
-    private String address;
-  private long salary;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long emp_id;
+	private String name;
+	private String address;
+	private long salary;
 
-    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private EmployeeDetails details;
+	@OneToOne(mappedBy="employee")
+	private EmployeeDetails employeedetails;
 
-    public Employee( String name,String address, long salary) {
+	public Employee(String name, String address, long salary) {
 		super();
-		this.name=name;
+		this.name = name;
 		this.address = address;
 		this.salary = salary;
-	
+
 	}
 
 	public Long getEmp_id() {
@@ -48,8 +40,6 @@ private String name;
 		return address;
 	}
 
-	
-	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -63,16 +53,16 @@ private String name;
 	}
 
 	public EmployeeDetails getDetails() {
-		return details;
+		return employeedetails;
 	}
 
-	public void setDetails(EmployeeDetails details) {
-		this.details = details;
+	public void setDetails(EmployeeDetails employeedetails) {
+		this.employeedetails = employeedetails;
 	}
 
 	public Employee() {
 		super();
-    }
+	}
 
 	public String getName() {
 		return name;
@@ -82,7 +72,4 @@ private String name;
 		this.name = name;
 	}
 
-    
-
-	
 }

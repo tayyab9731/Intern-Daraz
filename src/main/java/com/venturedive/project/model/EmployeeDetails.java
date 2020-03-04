@@ -1,22 +1,28 @@
 package com.venturedive.project.model;
 
-import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+@Entity
 public class EmployeeDetails {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String email;
 	private String password;
 	private boolean isActive;
 
 //for User
 
-	
-	
-
 	// for Employee
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "employee_id", nullable = false)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn( name="Emp_ID")
+	
 	private Employee employee;
 
 	public Employee getEmployee() {
@@ -27,7 +33,6 @@ public class EmployeeDetails {
 		this.employee = employee;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}
@@ -51,7 +56,6 @@ public class EmployeeDetails {
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
 
 	public EmployeeDetails(String email, String password, boolean b) {
 		super();
