@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.venturedive.project.dto.CustomerDto;
-import com.venturedive.project.model.UserDetails;
+import com.venturedive.project.model.CustomerDetail;
 import com.venturedive.project.services.CustomerService;
 
 @RestController

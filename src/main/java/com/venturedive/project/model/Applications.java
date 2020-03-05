@@ -1,30 +1,42 @@
 package com.venturedive.project.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
 @Entity
 public class Applications {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    
-    private String name;
-    private long price;
-    private String specification;
-    private String image;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "type_id", nullable = false)
-    private ApplicationTypes applicationtype;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-	public Applications( String name, long price, String specification, String image,
-			ApplicationTypes applicationtype) {
+	private String name;
+	private long price;
+	private String specification;
+	private String image;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "type_id", nullable = false)
+	private ApplicationTypes applicationtype;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "Cart", joinColumns = {
+			@JoinColumn(name = "App_ID", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "Order_id", referencedColumnName = "id", nullable = false, updatable = false) })
+
+	private Set<OrderDetail> orders = new HashSet<>();
+
+	public Applications(String name, long price, String specification, String image, ApplicationTypes applicationtype) {
 		super();
-	
+
 		this.name = name;
 		this.price = price;
 		this.specification = specification;

@@ -1,5 +1,7 @@
 package com.venturedive.project.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -15,7 +18,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 
 @Inheritance(strategy = InheritanceType.JOINED)
-public class customer extends AbstractPersistable<Long> {
+public class Customer extends AbstractPersistable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +27,22 @@ public class customer extends AbstractPersistable<Long> {
 	private String name;
 
 	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private UserDetails details;
+	private CustomerDetail details;
 
-	public customer() {
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<OrderDetail> orders;
+	public Customer() {
 	}
 
-	public customer(String name) {
+	public Set<OrderDetail> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<OrderDetail> orders) {
+		this.orders = orders;
+	}
+
+	public Customer(String name) {
 		super();
 		this.name = name;
 
@@ -51,11 +64,11 @@ public class customer extends AbstractPersistable<Long> {
 		this.name = name;
 	}
 
-	public UserDetails getAddress() {
+	public CustomerDetail getAddress() {
 		return details;
 	}
 
-	public void setAddress(UserDetails address) {
+	public void setAddress(CustomerDetail address) {
 		this.details = address;
 	}
 
