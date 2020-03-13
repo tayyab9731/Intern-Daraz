@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class UserDetails extends AbstractPersistable<Long> {
+public class CustomerDetails extends AbstractPersistable<Long> {
 
 	private String email;
 	private String password;
@@ -29,7 +29,7 @@ public class UserDetails extends AbstractPersistable<Long> {
 	private customer customer;
 
 	
-	public UserDetails() {
+	public CustomerDetails() {
 	}
 
 	public String getEmail() {
@@ -56,7 +56,7 @@ public class UserDetails extends AbstractPersistable<Long> {
 		this.isActive = isActive;
 	}
 
-	public UserDetails(String email, String password, boolean b) {
+	public CustomerDetails(String email, String password, boolean b) {
 		super();
 
 		this.email = email;
