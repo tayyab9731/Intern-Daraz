@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 
 @Inheritance(strategy = InheritanceType.JOINED)
-public class customer extends AbstractPersistable<Long> {
+public class Customer extends AbstractPersistable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class customer extends AbstractPersistable<Long> {
 	@OneToOne(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserDetails details;
 
-	public customer() {
+	public Customer() {
 	}
 
 	public customer(String name) {
